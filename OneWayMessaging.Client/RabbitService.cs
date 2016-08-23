@@ -1,50 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using RabbitMQ.Client;
 
 namespace OneWayMessaging.Client
 {
     public class RabbitService : IDisposable
     {
-        private string hostName = "localhost";
-        private string username = "guest";
-        private string password = "guest";
-        private string exchangeName = "";
-        private string queueName = "OneWayMessagingDemo";
-        private bool isDuable = true;
+        private const string HostName = "localhost";
+        private const string Username = "guest";
+        private const string Password = "guest";
+        private const string ExchangeName = "";
+        private const string QueueName = "OneWayMessagingDemo";
 
-        private string virtualHost = "";
-        private int port = 0;
-
-        private ConnectionFactory connectionFactory;
-        private IConnection connection;
-        private IModel channel;
+        private readonly IConnection connection;
+        private readonly IModel channel;
 
         public RabbitService()
         {
-            connectionFactory = new ConnectionFactory
+            var connectionFactory = new ConnectionFactory
             {
-                HostName = hostName,
-                UserName = username,
-                Password = password
+                HostName = HostName,
+                UserName = Username,
+                Password = Password
             };
-
-            if (!string.IsNullOrEmpty(virtualHost))
-                connectionFactory.VirtualHost = virtualHost;
-
-            if (port > 0)
-                connectionFactory.Port = port;
 
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
-        }
-
-        public void CreateQueue()
-        {
-            channel.QueueDeclare(queueName, true, false, false, null);
+            channel.QueueDeclare(QueueName, true, false, false, null);
         }
 
         public void Send(string message)
@@ -54,7 +36,7 @@ namespace OneWayMessaging.Client
 
             var messageBuffer = Encoding.Default.GetBytes(message);
 
-            channel.BasicPublish(exchangeName, queueName, properties, messageBuffer);
+            channel.BasicPublish(ExchangeName, QueueName, properties, messageBuffer);
         }
 
         public void Dispose()

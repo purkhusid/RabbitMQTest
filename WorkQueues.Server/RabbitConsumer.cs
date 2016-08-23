@@ -6,40 +6,28 @@ using RabbitMQ.Client.Events;
 
 namespace WorkQueues.Server
 {
-    public class RabbitConsumer
+    public class RabbitConsumer : IDisposable
     {
-        private string hostName = "localhost";
-        private string username = "guest";
-        private string password = "guest";
-        private string exchangeName = "";
-        private string queueName = "WorkQueuesDemo";
-        private bool isDurable = true;
+        private const string HostName = "localhost";
+        private const string Username = "guest";
+        private const string Password = "guest";
+        private const string QueueName = "WorkQueuesDemo";
 
-        private string virtualHost = "";
-        private int port = 0;
-
-        private readonly ConnectionFactory connectionFactory;
         private readonly IConnection connection;
         private readonly IModel channel;
 
-
         public RabbitConsumer()
         {
-            connectionFactory = new ConnectionFactory
+            var connectionFactory = new ConnectionFactory
             {
-                HostName = hostName,
-                //UserName = username,
-                //Password = password
+                HostName = HostName,
+                UserName = Username,
+                Password = Password
             };
-
-            if (!string.IsNullOrEmpty(virtualHost))
-                connectionFactory.VirtualHost = virtualHost;
-
-            if (port > 0)
-                connectionFactory.Port = port;
 
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
+            channel.QueueDeclare(QueueName, true, false, false, null);
             channel.BasicQos(0, 1, false);
         }
 
@@ -59,12 +47,13 @@ namespace WorkQueues.Server
                 channel.BasicAck(ea.DeliveryTag, false);
             };
 
-            channel.BasicConsume(queueName, false, consumer);
+            channel.BasicConsume(QueueName, false, consumer);
         }
 
-        public void CreateQueue()
+        public void Dispose()
         {
-            channel.QueueDeclare(queueName, isDurable, false, false, null);
+            connection.Dispose();
+            channel.Dispose();
         }
     }
 }

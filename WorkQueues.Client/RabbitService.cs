@@ -6,43 +6,28 @@ namespace WorkQueues.Client
 {
     public class RabbitService : IDisposable
     {
-        private string hostName = "localhost";
-        private string username = "guest";
-        private string password = "guest";
-        private string exchangeName = "";
-        private string queueName = "WorkQueuesDemo";
-        private bool isDurable = true;
+        private const string HostName = "localhost";
+        private const string Username = "guest";
+        private const string Password = "guest";
+        private const string ExchangeName = ""; //Default Queue
+        private const string QueueName = "WorkQueuesDemo";
 
-        private string virtualHost = "";
-        private int port = 0;
-
-        private ConnectionFactory connectionFactory;
-        private IConnection connection;
-        private IModel channel;
+        private readonly IConnection connection;
+        private readonly IModel channel;
 
         public RabbitService()
         {
-            connectionFactory = new ConnectionFactory
+            var connectionFactory = new ConnectionFactory
             {
-                HostName = hostName,
-                //UserName = username,
-                //Password = password
+                HostName = HostName,
+                UserName = Username,
+                Password = Password
             };
-
-            if (!string.IsNullOrEmpty(virtualHost))
-                connectionFactory.VirtualHost = virtualHost;
-
-            if (port > 0)
-                connectionFactory.Port = port;
 
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
+            channel.QueueDeclare(QueueName, true, false, false, null);
             channel.BasicQos(0, 1, false);
-        }
-
-        public void CreateQueue()
-        {
-            channel.QueueDeclare(queueName, isDurable, false, false, null);
         }
 
         public void Send(string message)
@@ -52,7 +37,7 @@ namespace WorkQueues.Client
 
             var messageBuffer = Encoding.Default.GetBytes(message);
 
-            channel.BasicPublish(exchangeName, queueName, properties, messageBuffer);
+            channel.BasicPublish(ExchangeName, QueueName, properties, messageBuffer);
         }
 
         public void Dispose()

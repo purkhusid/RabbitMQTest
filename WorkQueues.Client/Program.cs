@@ -12,7 +12,6 @@ namespace WorkQueues.Client
 
             var messageCount = 0;
             var rabbitService = new RabbitService();
-            rabbitService.CreateQueue();
 
             while (true)
             {

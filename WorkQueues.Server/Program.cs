@@ -11,7 +11,6 @@ namespace WorkQueues.Server
             Console.WriteLine();
 
             var queueProcessor = new RabbitConsumer();
-            queueProcessor.CreateQueue();
             queueProcessor.Start();
             Console.ReadLine();
         }
