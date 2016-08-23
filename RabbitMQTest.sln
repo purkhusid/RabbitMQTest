@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQTest", "RabbitMQTest\RabbitMQTest.csproj", "{D06059C8-786A-45F9-B005-1F7DA6197588}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessaging.Client", "OneWayMessaging.Client\OneWayMessaging.Client.csproj", "{C360B03B-9079-4A77-9DB5-C1E9943049DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessaging.Server", "OneWayMessaging.Server\OneWayMessaging.Server.csproj", "{F3CE15E7-7274-471F-819F-FEE415F54226}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D06059C8-786A-45F9-B005-1F7DA6197588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06059C8-786A-45F9-B005-1F7DA6197588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06059C8-786A-45F9-B005-1F7DA6197588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C360B03B-9079-4A77-9DB5-C1E9943049DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C360B03B-9079-4A77-9DB5-C1E9943049DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C360B03B-9079-4A77-9DB5-C1E9943049DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C360B03B-9079-4A77-9DB5-C1E9943049DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CE15E7-7274-471F-819F-FEE415F54226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CE15E7-7274-471F-819F-FEE415F54226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CE15E7-7274-471F-819F-FEE415F54226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CE15E7-7274-471F-819F-FEE415F54226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

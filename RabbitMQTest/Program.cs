@@ -22,23 +22,23 @@ namespace RabbitMQTest
             };
 
             var connection = connectionFactory.CreateConnection();
-            var model = connection.CreateModel();
+            var channel = connection.CreateModel();
 
-            model.QueueDeclare(queueName, true, false, false, null);
+            channel.QueueDeclare(queueName, true, false, false, null);
             Console.WriteLine("Queue created");
 
-            model.ExchangeDeclare(exchangeName, ExchangeType.Topic);
+            channel.ExchangeDeclare(exchangeName, ExchangeType.Topic);
             Console.WriteLine("Exchange created");
 
-            model.QueueBind(queueName, exchangeName, "cars");
+            channel.QueueBind(queueName, exchangeName, "cars");
             Console.WriteLine("My Queue bound to MyExchange");
 
-            var properties = model.CreateBasicProperties();
+            var properties = channel.CreateBasicProperties();
             properties.Persistent = true;
 
             var messageBuffer = Encoding.Default.GetBytes("This is a message");
 
-            model.BasicPublish(exchangeName, "cars", properties, messageBuffer);
+            channel.BasicPublish(exchangeName, "cars", properties, messageBuffer);
             Console.WriteLine("Message sent");
 
             Console.ReadLine();
