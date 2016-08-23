@@ -9,7 +9,7 @@ namespace Routing.Client
         private const string HostName = "localhost";
         private const string Username = "guest";
         private const string Password = "guest";
-        private const string ExchangeName = "RoutingDemo";
+        private const string ExchangeName = "TopicsDemo"; //topic type exchange
 
         private readonly IConnection connection;
         private readonly IModel channel;
@@ -25,10 +25,10 @@ namespace Routing.Client
 
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
-            channel.ExchangeDeclare(ExchangeName, "direct", true);
+            channel.ExchangeDeclare(ExchangeName, "topic", true);
         }
 
-        public void Send(string message, string routingKey)
+        public void Send(string message, string topic)
         {
             var properties = channel.CreateBasicProperties();
             properties.Persistent = true;
@@ -36,8 +36,8 @@ namespace Routing.Client
             var messageBuffer = Encoding.Default.GetBytes(message);
 
             //We are using a direct exchange now.
-            //Queues specify what routing key they are interested in
-            channel.BasicPublish(ExchangeName, routingKey, properties, messageBuffer);
+            //Queues specify what topics they are interested in
+            channel.BasicPublish(ExchangeName, topic, properties, messageBuffer);
         }
 
         public void Dispose()
