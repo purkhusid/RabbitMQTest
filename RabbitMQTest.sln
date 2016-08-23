@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessaging.Client", "O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWayMessaging.Server", "OneWayMessaging.Server\OneWayMessaging.Server.csproj", "{F3CE15E7-7274-471F-819F-FEE415F54226}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkQueues.Client", "WorkQueues.Client\WorkQueues.Client.csproj", "{60F805B4-BD84-4BA5-96B8-E4DF09DDB27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkQueues.Server", "WorkQueues.Server\WorkQueues.Server.csproj", "{D33006D8-3563-4FF4-A1D1-E6E06D3C554E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{F3CE15E7-7274-471F-819F-FEE415F54226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3CE15E7-7274-471F-819F-FEE415F54226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3CE15E7-7274-471F-819F-FEE415F54226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60F805B4-BD84-4BA5-96B8-E4DF09DDB27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F805B4-BD84-4BA5-96B8-E4DF09DDB27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F805B4-BD84-4BA5-96B8-E4DF09DDB27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F805B4-BD84-4BA5-96B8-E4DF09DDB27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D33006D8-3563-4FF4-A1D1-E6E06D3C554E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D33006D8-3563-4FF4-A1D1-E6E06D3C554E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D33006D8-3563-4FF4-A1D1-E6E06D3C554E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D33006D8-3563-4FF4-A1D1-E6E06D3C554E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace OneWayMessaging.Server
+namespace WorkQueues.Server
 {
     public class RabbitConsumer
     {
@@ -11,8 +12,8 @@ namespace OneWayMessaging.Server
         private string username = "guest";
         private string password = "guest";
         private string exchangeName = "";
-        private string queueName = "OneWayMessagingDemo";
-        private bool isDuable = true;
+        private string queueName = "WorkQueuesDemo";
+        private bool isDurable = true;
 
         private string virtualHost = "";
         private int port = 0;
@@ -21,13 +22,14 @@ namespace OneWayMessaging.Server
         private readonly IConnection connection;
         private readonly IModel channel;
 
+
         public RabbitConsumer()
         {
             connectionFactory = new ConnectionFactory
             {
                 HostName = hostName,
-                UserName = username,
-                Password = password
+                //UserName = username,
+                //Password = password
             };
 
             if (!string.IsNullOrEmpty(virtualHost))
@@ -50,6 +52,10 @@ namespace OneWayMessaging.Server
                 var body = ea.Body;
                 var message = Encoding.Default.GetString(body);
                 Console.WriteLine($"Received: {message}");
+                Console.WriteLine("Starting work...");
+                Thread.Sleep(1000);
+                Console.WriteLine("Finished work...");
+
                 channel.BasicAck(ea.DeliveryTag, false);
             };
 
@@ -58,7 +64,7 @@ namespace OneWayMessaging.Server
 
         public void CreateQueue()
         {
-            channel.QueueDeclare(queueName, true, false, false, null);
+            channel.QueueDeclare(queueName, isDurable, false, false, null);
         }
     }
 }
