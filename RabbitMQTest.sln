@@ -29,6 +29,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.Client", "Topics.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.Server", "Topics.Server\Topics.Server.csproj", "{51E1F084-38B9-4722-9CF3-C88A8CBE2F86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{99B079F3-3C47-412F-AB12-3C133B746880}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{0E1730B2-F59F-4A52-8FF1-470745B6E8F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderCreatedProcessor", "OrderCreatedProcessor\OrderCreatedProcessor.csproj", "{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,8 +93,20 @@ Global
 		{51E1F084-38B9-4722-9CF3-C88A8CBE2F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51E1F084-38B9-4722-9CF3-C88A8CBE2F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51E1F084-38B9-4722-9CF3-C88A8CBE2F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1730B2-F59F-4A52-8FF1-470745B6E8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1730B2-F59F-4A52-8FF1-470745B6E8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1730B2-F59F-4A52-8FF1-470745B6E8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1730B2-F59F-4A52-8FF1-470745B6E8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E1730B2-F59F-4A52-8FF1-470745B6E8F0} = {99B079F3-3C47-412F-AB12-3C133B746880}
+		{FB9F4B5B-EFC2-43E1-A6BB-9CC89DECDA75} = {99B079F3-3C47-412F-AB12-3C133B746880}
 	EndGlobalSection
 EndGlobal

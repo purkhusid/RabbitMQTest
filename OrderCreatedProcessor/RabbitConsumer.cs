@@ -4,20 +4,20 @@ using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace PublishSubscribe.Server2
+namespace Routing.Server
 {
     public class RabbitConsumer : IDisposable
     {
         private const string HostName = "localhost";
         private const string Username = "guest";
         private const string Password = "guest";
-        private const string ExchangeName = "PublishSubscribeExchangeDemo";
-        private const string QueueName = "PublishSubscribeDemoQueue";
+        private const string ExchangeName = "OrderEvents"; //topic type exchange
+        private readonly string queueName = "OrderCreatedProcessor";
 
         private readonly IConnection connection;
         private readonly IModel channel;
 
-        public RabbitConsumer()
+        public RabbitConsumer(string topics)
         {
             var connectionFactory = new ConnectionFactory
             {
@@ -28,9 +28,10 @@ namespace PublishSubscribe.Server2
 
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
-            channel.ExchangeDeclare(ExchangeName, "fanout", true);
-            channel.QueueDeclare(QueueName, true, false, false, null);
-            channel.QueueBind(QueueName, ExchangeName, "");
+            channel.ExchangeDeclare(ExchangeName, "topic", true);
+
+            channel.QueueDeclare(queueName, true, false, false, null);
+            channel.QueueBind(queueName, ExchangeName, topics);
             channel.BasicQos(0, 1, false);
         }
 
@@ -50,7 +51,7 @@ namespace PublishSubscribe.Server2
                 channel.BasicAck(ea.DeliveryTag, false);
             };
 
-            channel.BasicConsume(QueueName, false, consumer);
+            channel.BasicConsume(queueName, false, consumer);
         }
 
         public void Dispose()
